@@ -28,8 +28,13 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
 
   useEffect(() => {
     setIsHydrated(true)
-    setDisplayResults(results)
-  }, [results])
+  }, [])
+
+  useEffect(() => {
+    if (isHydrated) {
+      setDisplayResults(results)
+    }
+  }, [results, isHydrated])
 
   // If not hydrated yet or no results, show initial state
   if (!isHydrated || !displayResults) {

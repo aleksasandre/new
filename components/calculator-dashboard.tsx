@@ -32,6 +32,8 @@ export function CalculatorDashboard({
   }, [])
 
   const calculateResults = useMemo(() => {
+    if (!isHydrated) return null
+    
     // Base time estimation (in days)
     let baseTime = 20
 
@@ -177,7 +179,7 @@ export function CalculatorDashboard({
       costEstimate: estimatedCost,
       breakdown,
     }
-  }, [formData])
+  }, [formData, isHydrated])
 
   const handleCalculate = () => {
     onResults(calculateResults)
