@@ -59,7 +59,7 @@ export function InformationSectionsAfter() {
                 <h3 className="mb-2 text-base font-semibold text-white">
                   {section.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
+                <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
                   {section.description}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export function InformationSectionsAfter() {
                 <h4 className="mb-2 text-xs font-semibold text-white uppercase tracking-wide">
                   Risks
                 </h4>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
+                <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
                   {`• Model does not cover all game types and workflows
 • Only character production is supported
 • No technical constraints (engine, pipeline specs)
@@ -113,7 +113,7 @@ export function InformationSectionsAfter() {
                 <h4 className="mb-2 text-xs font-semibold text-white uppercase tracking-wide">
                   Mitigation
                 </h4>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
+                <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
                   {`• Scope limited to character production only
 • Clear documentation of supported asset type
 • Tool positioned as early estimation, not technical planning

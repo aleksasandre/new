@@ -58,7 +58,7 @@ export function InformationSectionsBefore() {
                 <h3 className="mb-2 text-base font-semibold text-white">
                   {section.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
+                <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
                   {section.description}
                 </p>
               </div>
