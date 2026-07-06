@@ -34,10 +34,10 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
   // If not hydrated yet or no results, show initial state
   if (!isHydrated || !displayResults) {
     return (
-      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg flex flex-col items-center justify-center p-6 sm:p-8 min-h-[600px]">
-        <div className="mb-8 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 p-4">
+      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg flex flex-col items-center justify-center p-4 sm:p-5 min-h-[500px]">
+        <div className="mb-6 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 p-3">
           <svg
-            className="h-12 w-12 text-indigo-400"
+            className="h-10 w-10 text-indigo-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -50,15 +50,15 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
             />
           </svg>
         </div>
-        <h3 className="mb-3 text-xl font-semibold text-white text-center">
+        <h3 className="mb-2 text-lg font-semibold text-white text-center">
           Production Estimate
         </h3>
-        <p className="mb-8 text-center text-foreground/70 max-w-xs">
+        <p className="mb-6 text-center text-foreground/70 max-w-xs text-sm">
           Configure your project parameters and click Calculate to generate detailed production estimates.
         </p>
         <button
           onClick={onCalculate}
-          className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-lg hover:shadow-indigo-500/30"
+          className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-5 py-2 text-sm font-semibold text-white transition-all duration-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-lg hover:shadow-indigo-500/30"
         >
           Calculate
           <svg
@@ -80,14 +80,14 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {/* Main Results Card */}
-      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg p-6 sm:p-8">
-        <h3 className="mb-8 text-xl font-semibold text-white">
+      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg p-4 sm:p-5">
+        <h3 className="mb-4 text-lg font-semibold text-white">
           Estimated Results
         </h3>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Time Estimate */}
           <div className="rounded-lg border border-indigo-500/30 bg-indigo-500/10 p-5">
             <p className="mb-2 text-sm font-medium text-indigo-300/80">
@@ -126,8 +126,8 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
       </div>
 
       {/* Production Breakdown */}
-      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg p-6 sm:p-8">
-        <h4 className="mb-5 text-base font-semibold text-white">
+      <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg p-4 sm:p-5">
+        <h4 className="mb-4 text-base font-semibold text-white">
           Production Breakdown
         </h4>
 
