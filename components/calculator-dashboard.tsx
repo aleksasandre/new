@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { InputForm } from './input-form'
 import { ResultsPanel } from './results-panel'
 
@@ -13,6 +13,7 @@ export function CalculatorDashboard({
   onResults,
   initialResults,
 }: CalculatorDashboardProps) {
+  const [isHydrated, setIsHydrated] = useState(false)
   const [formData, setFormData] = useState({
     assetType: 'Character',
     category: 'Human',
@@ -25,6 +26,10 @@ export function CalculatorDashboard({
     conceptReadiness: 'Idea',
     schedulePressure: 'No',
   })
+
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
 
   const calculateResults = useMemo(() => {
     // Base time estimation (in days)
@@ -193,7 +198,7 @@ export function CalculatorDashboard({
         <div className="grid gap-4 lg:grid-cols-2">
           <InputForm formData={formData} onChange={setFormData} />
           <ResultsPanel
-            results={calculateResults}
+            results={isHydrated ? calculateResults : null}
             onCalculate={handleCalculate}
           />
         </div>
