@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { InputForm } from './input-form'
 import { ResultsPanel } from './results-panel'
 
@@ -13,20 +13,32 @@ export function CalculatorDashboard({
   onResults,
   initialResults,
 }: CalculatorDashboardProps) {
+  const [isHydrated, setIsHydrated] = useState(false)
   const [formData, setFormData] = useState({
-    assetType: 'Character',
-    category: 'Human',
-    hardSurface: 'None',
-    referenceQuality: 'Concept_Only',
-    pipeline: 'Basic',
-    gameScope: 'Mobile',
-    artStyle: 'Stylised',
-    startState: 'From_Scratch',
-    conceptReadiness: 'Idea',
-    schedulePressure: 'No',
+    assetType: '',
+    category: '',
+    hardSurface: '',
+    referenceQuality: '',
+    pipeline: '',
+    gameScope: '',
+    artStyle: '',
+    startState: '',
+    conceptReadiness: '',
+    schedulePressure: '',
   })
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
+
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
 
   const calculateResults = useMemo(() => {
+    if (!isHydrated || !hasUserInteracted) return null
+    
+    // Check if all fields are filled
+    const allFieldsFilled = Object.values(formData).every((value) => value !== '')
+    if (!allFieldsFilled) return null
+    
     // Base time estimation (in days)
     let baseTime = 20
 
@@ -172,28 +184,35 @@ export function CalculatorDashboard({
       costEstimate: estimatedCost,
       breakdown,
     }
-  }, [formData])
+  }, [formData, isHydrated, hasUserInteracted])
+
+  const handleFormChange = (newFormData: Record<string, string>) => {
+    setFormData(newFormData)
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true)
+    }
+  }
 
   const handleCalculate = () => {
     onResults(calculateResults)
   }
 
   return (
-    <section className="relative border-b border-white/10 bg-background/50 px-4 py-16 sm:py-20 md:py-24">
+    <section className="relative border-b border-white/10 bg-background/50 px-4 py-10 sm:py-12 md:py-14">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
-          <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+        <div className="mb-8">
+          <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
             Production Calculator
           </h2>
-          <p className="text-base text-foreground/70">
+          <p className="text-sm text-foreground/70">
             Configure your project parameters to generate accurate estimates.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          <InputForm formData={formData} onChange={setFormData} />
+        <div className="grid gap-4 lg:grid-cols-2">
+          <InputForm formData={formData} onChange={handleFormChange} />
           <ResultsPanel
-            results={calculateResults}
+            results={isHydrated ? calculateResults : null}
             onCalculate={handleCalculate}
           />
         </div>

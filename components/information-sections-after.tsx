@@ -1,20 +1,5 @@
-export function InformationSections() {
+export function InformationSectionsAfter() {
   const sections = [
-    {
-      title: 'Project Summary',
-      description:
-        'This tool supports early-stage production planning for 3D game art assets by providing production time and cost estimates based on pipeline complexity and production factors.',
-    },
-    {
-      title: 'Business Problem',
-      description:
-        'Game studios often struggle to understand how asset complexity and production requirements affect timelines and costs. This creates challenges in planning budgets, resources, and delivery expectations.',
-    },
-    {
-      title: 'Scope',
-      description:
-        'In scope: character production estimation.\n\nOut of scope: animation, VFX, and studio scheduling.',
-    },
     {
       title: 'Estimation Assumptions',
       description:
@@ -45,26 +30,17 @@ export function InformationSections() {
   return (
     <section className="bg-background/50 px-4 py-8 sm:py-10 md:py-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
-          <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
-            About This Tool
-          </h2>
-          <p className="text-base text-foreground/70">
-            Complete documentation and methodologies behind our production calculator.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {sections.map((section, index) => (
             <div
               key={index}
-              className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg group relative overflow-hidden p-6 sm:p-7 transition-all duration-300 hover:border-white/20"
+              className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg group relative overflow-hidden p-4 sm:p-5 transition-all duration-300 hover:border-white/20"
             >
               {/* Gradient background on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="relative">
-                <div className="mb-3 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+                <div className="mb-2 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
                   <svg
                     className="h-5 w-5 text-indigo-400"
                     fill="none"
@@ -80,10 +56,10 @@ export function InformationSections() {
                   </svg>
                 </div>
 
-                <h3 className="mb-3 text-lg font-semibold text-white">
+                <h3 className="mb-2 text-base font-semibold text-white">
                   {section.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
+                <p className="text-xs leading-relaxed text-foreground/75 whitespace-pre-line">
                   {section.description}
                 </p>
               </div>
@@ -91,13 +67,13 @@ export function InformationSections() {
           ))}
         </div>
 
-        {/* Risks & Mitigation Section - Special Two Column Layout */}
-        <div className="mt-6 rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg group relative overflow-hidden p-6 sm:p-7 transition-all duration-300 hover:border-white/20">
+        {/* Risks & Mitigation Section - Compact Two Column Layout */}
+        <div className="mt-5 rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg group relative overflow-hidden p-4 sm:p-5 transition-all duration-300 hover:border-white/20">
           {/* Gradient background on hover */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
           <div className="relative">
-            <div className="mb-3 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+            <div className="mb-2 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
               <svg
                 className="h-5 w-5 text-indigo-400"
                 fill="none"
@@ -113,31 +89,36 @@ export function InformationSections() {
               </svg>
             </div>
 
-            <h3 className="mb-6 text-lg font-semibold text-white">
+            <h3 className="mb-4 text-base font-semibold text-white">
               Risks & Mitigation
             </h3>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               {/* Risks Column */}
               <div>
-                <h4 className="mb-4 font-semibold text-white flex items-center gap-2">
+                <h4 className="mb-2 text-xs font-semibold text-white uppercase tracking-wide">
                   Risks
-                  <span className="text-indigo-400 text-xl">→</span>
                 </h4>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
-                  {`• Limited workflow coverage
-• Character production only
-• Single currency support`}
+                <p className="text-xs leading-relaxed text-foreground/75 whitespace-pre-line">
+                  {`• Model does not cover all game types and workflows
+• Only character production is supported
+• No technical constraints (engine, pipeline specs)
+• Limited input structure for complex assets
+• Single currency support only (€)`}
                 </p>
               </div>
 
               {/* Mitigation Column */}
               <div>
-                <h4 className="mb-4 font-semibold text-white">Mitigation</h4>
-                <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
-                  {`• Clear scope definition
-• Future pipeline expansion
-• Multi-currency support`}
+                <h4 className="mb-2 text-xs font-semibold text-white uppercase tracking-wide">
+                  Mitigation
+                </h4>
+                <p className="text-xs leading-relaxed text-foreground/75 whitespace-pre-line">
+                  {`• Scope limited to character production only
+• Clear documentation of supported asset type
+• Tool positioned as early estimation, not technical planning
+• Optional component-level complexity extension
+• Future support for multiple currencies (USD, local currencies)`}
                 </p>
               </div>
             </div>
