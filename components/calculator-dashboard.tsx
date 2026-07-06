@@ -15,24 +15,29 @@ export function CalculatorDashboard({
 }: CalculatorDashboardProps) {
   const [isHydrated, setIsHydrated] = useState(false)
   const [formData, setFormData] = useState({
-    assetType: 'Character',
-    category: 'Human',
-    hardSurface: 'None',
-    referenceQuality: 'Concept_Only',
-    pipeline: 'Basic',
-    gameScope: 'Mobile',
-    artStyle: 'Stylised',
-    startState: 'From_Scratch',
-    conceptReadiness: 'Idea',
-    schedulePressure: 'No',
+    assetType: '',
+    category: '',
+    hardSurface: '',
+    referenceQuality: '',
+    pipeline: '',
+    gameScope: '',
+    artStyle: '',
+    startState: '',
+    conceptReadiness: '',
+    schedulePressure: '',
   })
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
 
   useEffect(() => {
     setIsHydrated(true)
   }, [])
 
   const calculateResults = useMemo(() => {
-    if (!isHydrated) return null
+    if (!isHydrated || !hasUserInteracted) return null
+    
+    // Check if all fields are filled
+    const allFieldsFilled = Object.values(formData).every((value) => value !== '')
+    if (!allFieldsFilled) return null
     
     // Base time estimation (in days)
     let baseTime = 20
@@ -179,7 +184,14 @@ export function CalculatorDashboard({
       costEstimate: estimatedCost,
       breakdown,
     }
-  }, [formData, isHydrated])
+  }, [formData, isHydrated, hasUserInteracted])
+
+  const handleFormChange = (newFormData: Record<string, string>) => {
+    setFormData(newFormData)
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true)
+    }
+  }
 
   const handleCalculate = () => {
     onResults(calculateResults)
@@ -198,7 +210,7 @@ export function CalculatorDashboard({
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
-          <InputForm formData={formData} onChange={setFormData} />
+          <InputForm formData={formData} onChange={handleFormChange} />
           <ResultsPanel
             results={isHydrated ? calculateResults : null}
             onCalculate={handleCalculate}
