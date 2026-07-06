@@ -1,6 +1,6 @@
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-background via-background to-background/80 px-4 py-20 sm:py-28 md:py-36">
+    <section className="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-background via-background to-background/80 px-4 py-12 sm:py-16 md:py-20">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />

@@ -179,18 +179,18 @@ export function CalculatorDashboard({
   }
 
   return (
-    <section className="relative border-b border-white/10 bg-background/50 px-4 py-16 sm:py-20 md:py-24">
+    <section className="relative border-b border-white/10 bg-background/50 px-4 py-10 sm:py-12 md:py-14">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
-          <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+        <div className="mb-8">
+          <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
             Production Calculator
           </h2>
-          <p className="text-base text-foreground/70">
+          <p className="text-sm text-foreground/70">
             Configure your project parameters to generate accurate estimates.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-2">
           <InputForm formData={formData} onChange={setFormData} />
           <ResultsPanel
             results={calculateResults}
