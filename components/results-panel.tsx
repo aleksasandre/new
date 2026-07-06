@@ -23,14 +23,16 @@ const formatNumber = (num: number): string => {
 }
 
 export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
-  const [displayResults, setDisplayResults] = useState(results)
+  const [displayResults, setDisplayResults] = useState<typeof results>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
+    setIsHydrated(true)
     setDisplayResults(results)
   }, [results])
 
-  // If no results, show initial state
-  if (!displayResults) {
+  // If not hydrated yet or no results, show initial state
+  if (!isHydrated || !displayResults) {
     return (
       <div className="rounded-xl bg-card/30 border border-white/10 backdrop-blur-md shadow-lg flex flex-col items-center justify-center p-6 sm:p-8 min-h-[600px]">
         <div className="mb-8 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 p-4">
