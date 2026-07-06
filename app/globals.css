@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #0a0e27;
+  --color-foreground: #e8ecff;
+  --color-card: #131829;
+  --color-card-foreground: #e8ecff;
+  --color-primary: #6366f1;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #1a1f3a;
+  --color-secondary-foreground: #e8ecff;
+  --color-muted: #2a2f45;
+  --color-muted-foreground: #94a3b8;
+  --color-accent: #7c3aed;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-border: rgb(255 255 255 / 0.08);
+  --color-input: rgb(255 255 255 / 0.1);
+  --color-ring: #6366f1;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent;
+  }
+
+  .text-glow {
+    @apply text-foreground drop-shadow-[0_0_12px_rgba(99,102,241,0.3)];
+  }
+}
