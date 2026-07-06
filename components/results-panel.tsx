@@ -18,6 +18,10 @@ interface ResultsPanelProps {
   onCalculate: () => void
 }
 
+const formatNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
   const [displayResults, setDisplayResults] = useState(results)
 
@@ -105,15 +109,15 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
             </p>
             <div className="flex items-baseline gap-2 mb-2">
               <span className="text-3xl font-bold text-white">
-                €{displayResults.costMin.toLocaleString()}
+                €{formatNumber(displayResults.costMin)}
               </span>
               <span className="text-foreground/60">–</span>
               <span className="text-3xl font-bold text-white">
-                €{displayResults.costMax.toLocaleString()}
+                €{formatNumber(displayResults.costMax)}
               </span>
             </div>
             <p className="text-xs text-foreground/60">
-              Base estimate: €{displayResults.costEstimate.toLocaleString()}
+              Base estimate: €{formatNumber(displayResults.costEstimate)}
             </p>
           </div>
         </div>
