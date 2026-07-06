@@ -48,7 +48,7 @@ export function InformationSections() {
   ]
 
   return (
-    <section className="bg-background/50 px-4 py-16 sm:py-20 md:py-24">
+    <section className="bg-background/50 px-4 py-8 sm:py-10 md:py-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12">
           <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">

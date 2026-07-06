@@ -90,7 +90,7 @@ export function InputForm({ formData, onChange }: InputFormProps) {
               <select
                 value={formData[field.name] || ''}
                 onChange={(e) => handleChange(field.name, e.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-black transition-all duration-200 hover:bg-white/10 hover:border-white/25 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50"
+                className="w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-black transition-all duration-200 hover:bg-white hover:border-white/25 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50"
               >
                 {field.options.map((option) => (
                   <option key={option} value={option}>
