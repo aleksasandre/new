@@ -3,27 +3,12 @@ export function InformationSectionsAfter() {
     {
       title: 'Estimation Assumptions',
       description:
-        '• Single asset estimation\n• 8-hour production day\n• Animation excluded\n• Estimates are based on production complexity factors',
+        '• Single asset estimation\n• 8-hour production day\n• Animation excluded\n• Estimates represent early production planning assumptions, not final production quotes',
     },
     {
       title: 'Calculation Logic',
       description:
-        'Final estimate = base effort × production multipliers.\n\nEach production factor modifies the base effort to reflect complexity and project requirements.',
-    },
-    {
-      title: 'Production Factors Explained',
-      description:
-        'Asset complexity, references, pipeline requirements, game scope, art style, start state, concept readiness, and schedule pressure determine production effort.',
-    },
-    {
-      title: 'User Flow',
-      description:
-        'Select inputs → Calculate → Review estimates.',
-    },
-    {
-      title: 'Success Criteria',
-      description:
-        'Transparent estimates and support for budgeting and production planning decisions.',
+        'Final estimate = base effort × production multipliers.\n\nEach production factor modifies the estimation based on asset complexity, pipeline requirements, and project constraints.',
     },
   ]
 
@@ -40,7 +25,7 @@ export function InformationSectionsAfter() {
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="relative">
-                <div className="mb-2 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+                <div className="mb-1.5 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
                   <svg
                     className="h-5 w-5 text-indigo-400"
                     fill="none"
@@ -56,7 +41,7 @@ export function InformationSectionsAfter() {
                   </svg>
                 </div>
 
-                <h3 className="mb-2 text-base font-semibold text-white">
+                <h3 className="mb-1.5 text-base font-semibold text-white">
                   {section.title}
                 </h3>
                 <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
@@ -73,7 +58,7 @@ export function InformationSectionsAfter() {
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
           <div className="relative">
-            <div className="mb-2 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+            <div className="mb-1.5 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
               <svg
                 className="h-5 w-5 text-indigo-400"
                 fill="none"
@@ -89,21 +74,22 @@ export function InformationSectionsAfter() {
               </svg>
             </div>
 
-            <h3 className="mb-4 text-base font-semibold text-white">
+            <h3 className="mb-3 text-base font-semibold text-white">
               Risks & Mitigation
             </h3>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               {/* Risks Column */}
               <div>
                 <h4 className="mb-2 text-xs font-semibold text-white uppercase tracking-wide">
                   Risks
                 </h4>
                 <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
-                  {`• Model does not cover all game types and workflows
-• Only character production is supported
-• No technical constraints (engine, pipeline specs)
-• Limited input structure for complex assets
+                  {`• Estimates may not cover all production scenarios or unexpected project changes
+• Limited scope focused only on character production
+• Does not include animation, VFX, or engine-specific technical requirements
+• Clients may interpret estimates as final production quotes rather than early planning references
+• Complex projects may require additional expert review before final budgeting
 • Single currency support only (€)`}
                 </p>
               </div>
@@ -114,11 +100,11 @@ export function InformationSectionsAfter() {
                   Mitigation
                 </h4>
                 <p className="text-base leading-relaxed text-foreground/75 whitespace-pre-line">
-                  {`• Scope limited to character production only
-• Clear documentation of supported asset type
-• Tool positioned as early estimation, not technical planning
-• Optional component-level complexity extension
-• Future support for multiple currencies (USD, local currencies)`}
+                  {`• Clearly defined scope and estimation limitations
+• Positioned as an early planning tool, not a replacement for production expertise
+• Provides a shared reference point to align expectations between clients and production teams
+• Encourages further discussion and validation before project commitment
+• Future expansion with additional asset types, technical factors, and multi-currency support`}
                 </p>
               </div>
             </div>
