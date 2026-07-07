@@ -15,7 +15,7 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto max-w-2xl text-base text-foreground/80 leading-relaxed">
-          Estimate production time and cost for 3D game characters based on pipeline factors. A professional tool used in game studios to plan resources and budgets.
+          Estimate production time and cost for 3D game characters based on asset complexity, pipeline requirements, and production factors. Designed to support early-stage planning and budgeting for game studios and teams with limited game production experience.
         </p>
       </div>
     </section>

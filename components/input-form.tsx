@@ -34,7 +34,7 @@ const formFields = [
   {
     name: 'gameScope',
     label: 'Game Scope',
-    options: ['Mobile', 'Console', 'PC', 'AAA'],
+    options: ['Mobile', 'Console', 'PC'],
   },
   {
     name: 'artStyle',

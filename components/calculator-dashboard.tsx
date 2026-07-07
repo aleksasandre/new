@@ -123,14 +123,14 @@ export function CalculatorDashboard({
     }
     baseTime *= conceptMultiplier[formData.conceptReadiness] || 1.0
 
-    // Schedule pressure
-    const scheduleMultiplier: Record<string, number> = {
+    // Schedule pressure - reduces production days by allocating more resources
+    const scheduleTimeMultiplier: Record<string, number> = {
       No: 1.0,
-      Moderate: 1.1,
-      High: 1.25,
-      Critical: 1.5,
+      Moderate: 0.9,
+      High: 0.75,
+      Critical: 0.6,
     }
-    baseTime *= scheduleMultiplier[formData.schedulePressure] || 1.0
+    baseTime *= scheduleTimeMultiplier[formData.schedulePressure] || 1.0
 
     // Round to nearest day
     const totalDays = Math.round(baseTime)
@@ -150,7 +150,16 @@ export function CalculatorDashboard({
       dayRate = 400
     }
 
-    const estimatedCost = Math.round(totalDays * dayRate)
+    // Schedule pressure - cost multiplier (rush fees, overtime, additional resources)
+    const scheduleCostMultiplier: Record<string, number> = {
+      No: 1.0,
+      Moderate: 1.3,
+      High: 1.65,
+      Critical: 2.2,
+    }
+    const finalDayRate = dayRate * (scheduleCostMultiplier[formData.schedulePressure] || 1.0)
+
+    const estimatedCost = Math.round(totalDays * finalDayRate)
 
     // Production breakdown percentages
     let conceptPct = 15
