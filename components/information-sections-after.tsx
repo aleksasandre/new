@@ -8,7 +8,7 @@ export function InformationSectionsAfter() {
     {
       title: 'Calculation Logic',
       description:
-        'Final estimate = base effort × production multipliers.\n\nEach production factor modifies the estimation based on asset complexity, pipeline requirements, and project constraints.',
+        'Estimates are illustrative examples and should be adjusted based on studio-specific production data and workflows.\n\nFinal estimate = base effort × production multipliers.\n\nEach production factor modifies the estimation based on asset complexity, pipeline requirements, and project constraints.',
     },
   ]
 

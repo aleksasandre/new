@@ -23,7 +23,6 @@ export function CalculatorDashboard({
     gameScope: '',
     artStyle: '',
     startState: '',
-    conceptReadiness: '',
     schedulePressure: '',
   })
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
@@ -39,17 +38,26 @@ export function CalculatorDashboard({
     const allFieldsFilled = Object.values(formData).every((value) => value !== '')
     if (!allFieldsFilled) return null
     
-    // Base time estimation (in days)
-    let baseTime = 20
+    // Base production hours (in hours)
+    const baselineHours = {
+      blockout: 52,
+      highPoly: 64,
+      lowPoly: 40,
+      uvBaking: 28,
+      texturing: 60,
+      export: 1,
+    }
+    const totalBaselineHours = Object.values(baselineHours).reduce((a, b) => a + b, 0)
+    let totalHours = totalBaselineHours
 
     // Asset type multiplier
     const assetTypeMultiplier: Record<string, number> = {
-      Character: 1.0,
-      Creature: 1.3,
-      NPC: 0.8,
-      Boss: 1.5,
+      Small_Asset: 0.6,
+      Medium_Asset: 1.0,
+      Large_Asset: 1.4,
+      Hero_Asset: 1.8,
     }
-    baseTime *= assetTypeMultiplier[formData.assetType] || 1.0
+    totalHours *= assetTypeMultiplier[formData.assetType] || 1.0
 
     // Category multiplier
     const categoryMultiplier: Record<string, number> = {
@@ -58,7 +66,7 @@ export function CalculatorDashboard({
       Robot: 1.1,
       Alien: 1.3,
     }
-    baseTime *= categoryMultiplier[formData.category] || 1.0
+    totalHours *= categoryMultiplier[formData.category] || 1.0
 
     // Hard surface complexity
     const hardSurfaceMultiplier: Record<string, number> = {
@@ -67,7 +75,7 @@ export function CalculatorDashboard({
       Medium: 1.5,
       High: 2.0,
     }
-    baseTime *= hardSurfaceMultiplier[formData.hardSurface] || 1.0
+    totalHours *= hardSurfaceMultiplier[formData.hardSurface] || 1.0
 
     // Reference quality
     const referenceMultiplier: Record<string, number> = {
@@ -76,7 +84,7 @@ export function CalculatorDashboard({
       Detailed_Concept: 1.0,
       Photo_Reference: 0.8,
     }
-    baseTime *= referenceMultiplier[formData.referenceQuality] || 1.0
+    totalHours *= referenceMultiplier[formData.referenceQuality] || 1.0
 
     // Pipeline complexity
     const pipelineMultiplier: Record<string, number> = {
@@ -85,7 +93,7 @@ export function CalculatorDashboard({
       Advanced: 1.6,
       Complex: 2.0,
     }
-    baseTime *= pipelineMultiplier[formData.pipeline] || 1.0
+    totalHours *= pipelineMultiplier[formData.pipeline] || 1.0
 
     // Game scope
     const gameMultiplier: Record<string, number> = {
@@ -94,7 +102,7 @@ export function CalculatorDashboard({
       PC: 1.1,
       AAA: 1.4,
     }
-    baseTime *= gameMultiplier[formData.gameScope] || 1.0
+    totalHours *= gameMultiplier[formData.gameScope] || 1.0
 
     // Art style
     const artStyleMultiplier: Record<string, number> = {
@@ -103,7 +111,7 @@ export function CalculatorDashboard({
       Cartoon: 0.85,
       Minimal: 0.7,
     }
-    baseTime *= artStyleMultiplier[formData.artStyle] || 1.0
+    totalHours *= artStyleMultiplier[formData.artStyle] || 1.0
 
     // Start state
     const startStateMultiplier: Record<string, number> = {
@@ -112,28 +120,19 @@ export function CalculatorDashboard({
       Reference_Base: 0.5,
       Existing_Model: 0.3,
     }
-    baseTime *= startStateMultiplier[formData.startState] || 1.0
+    totalHours *= startStateMultiplier[formData.startState] || 1.0
 
-    // Concept readiness
-    const conceptMultiplier: Record<string, number> = {
-      Idea: 1.3,
-      Rough_Concept: 1.1,
-      Detailed_Concept: 1.0,
-      Production_Ready: 0.8,
-    }
-    baseTime *= conceptMultiplier[formData.conceptReadiness] || 1.0
-
-    // Schedule pressure - reduces production days by allocating more resources
+    // Schedule pressure - reduces production time by allocating more resources
     const scheduleTimeMultiplier: Record<string, number> = {
       No: 1.0,
       Moderate: 0.9,
       High: 0.75,
       Critical: 0.6,
     }
-    baseTime *= scheduleTimeMultiplier[formData.schedulePressure] || 1.0
+    totalHours *= scheduleTimeMultiplier[formData.schedulePressure] || 1.0
 
-    // Round to nearest day
-    const totalDays = Math.round(baseTime)
+    // Convert hours to days (8-hour day)
+    const totalDays = Math.round(totalHours / 8)
 
     // Calculate cost (€ per day is 400-600 depending on complexity)
     const baseDayRate = 500
@@ -144,9 +143,9 @@ export function CalculatorDashboard({
       (hardSurfaceMultiplier[formData.hardSurface] || 1.0) *
       (pipelineMultiplier[formData.pipeline] || 1.0)
 
-    if (complexityFactor > 1.5) {
+    if (complexityFactor > 2.0) {
       dayRate = 600
-    } else if (complexityFactor < 1.0) {
+    } else if (complexityFactor < 1.2) {
       dayRate = 400
     }
 
@@ -161,29 +160,24 @@ export function CalculatorDashboard({
 
     const estimatedCost = Math.round(totalDays * finalDayRate)
 
-    // Production breakdown percentages
-    let conceptPct = 15
-    let modelingPct = 40
-    let texturingPct = 35
-    let exportPct = 10
-
-    // Adjust based on hard surface complexity
-    if (formData.hardSurface !== 'None') {
-      modelingPct += 10
-      texturingPct -= 5
-    }
-
-    // Adjust based on pipeline complexity
-    if (formData.pipeline === 'Complex') {
-      exportPct += 5
-      modelingPct -= 3
-    }
-
+    // Production breakdown based on baseline and multipliers
     const breakdown = {
-      concept: Math.round((totalDays * conceptPct) / 100),
-      modeling: Math.round((totalDays * modelingPct) / 100),
-      texturing: Math.round((totalDays * texturingPct) / 100),
-      export: Math.round((totalDays * exportPct) / 100),
+      blockout: Math.round((baselineHours.blockout * totalHours) / totalBaselineHours),
+      highPoly: Math.round((baselineHours.highPoly * totalHours) / totalBaselineHours),
+      lowPoly: Math.round((baselineHours.lowPoly * totalHours) / totalBaselineHours),
+      uvBaking: Math.round((baselineHours.uvBaking * totalHours) / totalBaselineHours),
+      texturing: Math.round((baselineHours.texturing * totalHours) / totalBaselineHours),
+      export: Math.round((baselineHours.export * totalHours) / totalBaselineHours),
+    }
+    
+    // Convert hours to days for display
+    const breakdownDays = {
+      blockout: Math.round(breakdown.blockout / 8),
+      highPoly: Math.round(breakdown.highPoly / 8),
+      lowPoly: Math.round(breakdown.lowPoly / 8),
+      uvBaking: Math.round(breakdown.uvBaking / 8),
+      texturing: Math.round(breakdown.texturing / 8),
+      export: Math.round(breakdown.export / 8),
     }
 
     return {
@@ -191,7 +185,7 @@ export function CalculatorDashboard({
       costMin: estimatedCost - 1000,
       costMax: estimatedCost + 1000,
       costEstimate: estimatedCost,
-      breakdown,
+      breakdown: breakdownDays,
     }
   }, [formData, isHydrated, hasUserInteracted])
 
