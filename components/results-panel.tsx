@@ -9,8 +9,10 @@ interface ResultsPanelProps {
     costMax: number
     costEstimate: number
     breakdown: {
-      concept: number
-      modeling: number
+      blockout: number
+      highPoly: number
+      lowPoly: number
+      uvBaking: number
       texturing: number
       export: number
     }
@@ -139,24 +141,34 @@ export function ResultsPanel({ results, onCalculate }: ResultsPanelProps) {
         <div className="space-y-4">
           {[
             {
-              label: 'Concept',
-              days: displayResults.breakdown.concept,
+              label: 'Blockout',
+              days: displayResults.breakdown.blockout,
               color: 'from-indigo-500 to-indigo-600',
             },
             {
-              label: 'Modeling',
-              days: displayResults.breakdown.modeling,
+              label: 'High Poly',
+              days: displayResults.breakdown.highPoly,
               color: 'from-purple-500 to-purple-600',
+            },
+            {
+              label: 'Low Poly',
+              days: displayResults.breakdown.lowPoly,
+              color: 'from-pink-500 to-rose-600',
+            },
+            {
+              label: 'UV & Baking',
+              days: displayResults.breakdown.uvBaking,
+              color: 'from-cyan-500 to-blue-600',
             },
             {
               label: 'Texturing',
               days: displayResults.breakdown.texturing,
-              color: 'from-pink-500 to-purple-600',
+              color: 'from-orange-500 to-red-600',
             },
             {
               label: 'Export',
               days: displayResults.breakdown.export,
-              color: 'from-cyan-500 to-blue-600',
+              color: 'from-green-500 to-emerald-600',
             },
           ].map((phase) => (
             <div key={phase.label}>

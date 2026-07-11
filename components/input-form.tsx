@@ -9,7 +9,7 @@ const formFields = [
   {
     name: 'assetType',
     label: 'Asset Type',
-    options: ['Character', 'Creature', 'NPC', 'Boss'],
+    options: ['Small_Asset', 'Medium_Asset', 'Large_Asset', 'Hero_Asset'],
   },
   {
     name: 'category',
@@ -45,11 +45,6 @@ const formFields = [
     name: 'startState',
     label: 'Start State',
     options: ['From_Scratch', 'Partial_Model', 'Reference_Base', 'Existing_Model'],
-  },
-  {
-    name: 'conceptReadiness',
-    label: 'Concept Readiness',
-    options: ['Idea', 'Rough_Concept', 'Detailed_Concept', 'Production_Ready'],
   },
   {
     name: 'schedulePressure',
